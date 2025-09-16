@@ -1,0 +1,50 @@
+<!-- index.html
+Simple one-page "Good morning" website.
+Save this file as index.html in a folder and deploy or open locally.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Good Morning!</title>
+  <style>
+    :root{--bg:#0b1220;--card:#0f1724;--accent:#60a5fa}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{display:grid;place-items:center;background:linear-gradient(135deg,var(--bg),#071028);color:#e6eef8}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:40px;border-radius:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center;min-width:280px}
+    h1{margin:0 0 8px;font-size:2.25rem}
+    p{margin:0.25rem 0 1rem;opacity:0.9}
+    .time{font-weight:600;color:var(--accent)}
+    footer{margin-top:14px;font-size:0.85rem;opacity:0.7}
+    @media (max-width:420px){.card{padding:24px;border-radius:12px}h1{font-size:1.6rem}}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="greeting">Good morning! ☀️</h1>
+    <p id="message">Wishing you a great day. Share this page with someone to brighten their morning!</p>
+    <div class="time" id="time">--:--:--</div>
+    <footer>Made with ❤️ — simple static page</footer>
+  </main>
+
+  <script>
+    // show current time (updates every second)
+    function pad(n){return n<10?('0'+n):n}
+    function updateTime(){
+      const d=new Date();
+      const hh=pad(d.getHours()), mm=pad(d.getMinutes()), ss=pad(d.getSeconds());
+      document.getElementById('time').textContent = hh + ':' + mm + ':' + ss;
+      // change greeting based on hour
+      const g = d.getHours();
+      const el = document.getElementById('greeting');
+      if(g<12) el.textContent = 'Good morning! ☀️';
+      else if(g<18) el.textContent = 'Good afternoon! 🌤️';
+      else el.textContent = 'Good evening! 🌙';
+    }
+    updateTime();
+    setInterval(updateTime,1000);
+  </script>
+</body>
+</html>
